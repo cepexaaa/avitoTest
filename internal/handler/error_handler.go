@@ -23,18 +23,12 @@ func (h *ServerHandler) handleTeamError(err error) (api.PostTeamAddResponseObjec
 	switch err {
 	case domain.ErrTeamExists:
 		return api.PostTeamAdd400JSONResponse{
-			Error: buildError(api.TEAMEXISTS, "team_name already exists"),
+			Error: buildError(api.TEAMEXISTS, "Team creation failed"),
 		}, nil
 	default:
 		log.Printf("Internal team error: %v", err)
 		return api.PostTeamAdd400JSONResponse{
-			Error: struct {
-				Code    api.ErrorResponseErrorCode `json:"code"`
-				Message string                     `json:"message"`
-			}{
-				Code:    api.TEAMEXISTS,
-				Message: "Team creation failed",
-			},
+			Error: buildError(api.ErrorResponseErrorCode(err.Error()), "team_name already exists"),
 		}, nil
 	}
 }
@@ -56,7 +50,7 @@ func (h *ServerHandler) handlePRError(err error) (api.PostPullRequestCreateRespo
 	default:
 		log.Printf("Internal PR creation error: %v", err)
 		return api.PostPullRequestCreate404JSONResponse{
-			Error: buildError(api.NOTFOUND, "Author/team not found"),
+			Error: buildError(api.ErrorResponseErrorCode(err.Error()), "Author/team not found"),
 		}, nil
 	}
 }
@@ -82,7 +76,7 @@ func (h *ServerHandler) handlePRReassignError(err error) (api.PostPullRequestRea
 	default:
 		log.Printf("Internal PR reassign error: %v", err)
 		return api.PostPullRequestReassign404JSONResponse{
-			Error: buildError(api.NOTFOUND, "PR not found"),
+			Error: buildError(api.ErrorResponseErrorCode(err.Error()), "PR not found"),
 		}, nil
 	}
 }
