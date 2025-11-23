@@ -17,6 +17,9 @@ WORKDIR /root/
 COPY --from=builder /app/bin/server .
 COPY --from=builder /app/migrations ./migrations
 
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
+
 EXPOSE 8080
 
 CMD ["./server"]
