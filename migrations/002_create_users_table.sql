@@ -8,6 +8,3 @@ CREATE TABLE users (
 
 CREATE INDEX idx_users_team_id ON users(team_id);
 CREATE INDEX idx_users_is_active ON users(is_active);
-
--- +goose Down
-DROP TABLE users;

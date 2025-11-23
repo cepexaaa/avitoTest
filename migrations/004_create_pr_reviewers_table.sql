@@ -7,6 +7,3 @@ CREATE TABLE pr_reviewers (
 
 CREATE INDEX idx_pr_reviewers_pr_id ON pr_reviewers(pr_id);
 CREATE INDEX idx_pr_reviewers_reviewer_id ON pr_reviewers(reviewer_id);
-
--- +goose Down
-DROP TABLE pr_reviewers;

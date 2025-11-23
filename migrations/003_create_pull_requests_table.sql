@@ -10,6 +10,3 @@ CREATE TABLE pull_requests (
 
 CREATE INDEX idx_pr_author_id ON pull_requests(author_id);
 CREATE INDEX idx_pr_status ON pull_requests(status);
-
--- +goose Down
-DROP TABLE pull_requests;
