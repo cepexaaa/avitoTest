@@ -1,0 +1,46 @@
+version: "2"
+
+linters:
+  enable:
+    - typecheck 
+    - unused 
+    - errcheck 
+    - gosimple 
+    - ineffassign 
+    - staticcheck 
+    - revive 
+    - asciicheck 
+    - bidichk 
+    - exhaustive 
+    - errorlint 
+    - nilerr 
+    - nilnil 
+    - nolintlint 
+    - zerologlint 
+    - gofumpt 
+  
+linters-settings:
+  settings:
+    gocyclo:
+      min-complexity: 15
+    goconst:
+      min-len: 3
+      min-occurrences: 3
+    misspell:
+      locale: US
+    lll:
+      line-length: 120
+    gocritic:
+      enabled-checks:
+        - rangeExprCopy
+        - rangeValCopy
+        - captLocal
+        - commentFormatting
+
+
+run:
+  timeout: 5m
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
